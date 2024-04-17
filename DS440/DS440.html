@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spotify Recommendation Analytics Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .container {
+      width: 1050px; /* Adjust the width as needed */
+      height: 850px; /* Adjust the height as needed */
+      margin: 0 auto;
+      background-color: #323842; /* Set background color to light grey */
+      color: white; /* Set text color to white */
+    }
+    .title {
+      text-align: center;
+      color: white; /* Set title text color to white */
+    }
+    .input-scroll-box {
+      height: 200px; /* Adjust the height as needed */
+      overflow-y: auto; /* Enable vertical scrolling */
+      margin-bottom: 20px; /* Add margin at the bottom of each scroll box */
+    }
+    .remove-button {
+      background-color: transparent;
+      border: none;
+      color: red;
+      cursor: pointer;
+      font-size: 15px;
+    }
+    .remove-button:hover {
+      text-decoration: underline;
+    }
+    .input-list {
+      list-style-type: none; /* Remove default list style */
+      padding: 0; /* Remove default padding */
+    }
+    .section {
+      float: left;
+      width: calc(28.33% - 20px); /* Adjust the width as needed */
+      height: 700px;
+      margin-right: 20px; /* Add margin between sections */
+      border: 1px solid #ccc; /* Add border */
+      border-radius: 10px; /* Add curved edges */
+      padding: 10px; /* Add padding */
+      background-color: #59616e; /* Set background color of sections to lighter grey */
+      color: white; /* Set text color to white */
+    }
+    .input-group label {
+      display: block; /* Make labels display as block elements */
+      color: white; /* Set label text color to white */
+    }
+    .input-group input {
+      width: 255px; /* Adjust the width as needed */
+      background-color: white; /* Set background color of input fields to white */
+      color: #323842; /* Set text color of input fields to dark grey */
+    }
+    #attributes span {
+        display: block; /* Make each span element a block element */
+        margin-bottom: 10px; /* Add margin between each attribute */
+    }
+    .recommendations-box {
+      overflow-y: scroll;
+      height: 600px; /* Adjust the height as needed */
+      background-color: #525863; /* Set background color of recommendations box to white */
+      color: #323842; /* Set text color of recommendations box to dark grey */
+    }
+    #calculate-btn {
+      clear: both;
+      float: right;
+      margin-top: 20px; /* Add margin above the button */
+      background-color: #12ff41; /* Set background color of button to green */
+      color: white; /* Set text color of button to white */
+      border: none; /* Remove border */
+      border-radius: 5px; /* Add curved edges to button */
+      padding: 10px 20px; /* Add padding to button */
+      cursor: pointer; /* Add pointer cursor on hover */
+    }
+    #calculate-btn:hover {
+      background-color: #039e22; /* Darker green on hover */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">Spotify Recommendation Analytics Dashboard</h1>
+    <div class="section">
+      <h2>Inputs</h2>
+      <div class="input-scroll-box">
+        <label for="song">Song Name:</label>
+        <input type="text" id="song" placeholder="Enter song name" onkeydown="printInput(event, 'song')">
+	<ul id="song-list" class="input-list"></ul> <!-- New UL element for song inputs -->
+      </div>
+      <div class="input-scroll-box">
+        <label for="artist">Artist Name:</label>
+        <input type="text" id="artist" placeholder="Enter artist name" onkeydown="printInput(event, 'artist')">
+	<ul id="artist-list" class="input-list"></ul> <!-- New UL element for artist inputs -->
+      </div>
+      <div class="input-scroll-box">
+        <label for="genre">Genre:</label>
+        <input type="text" id="genre" placeholder="Enter genre" onkeydown="printInput(event, 'genre')">
+	<ul id="genre-list" class="input-list"></ul> <!-- New UL element for genre inputs -->
+      </div>
+    </div>
+    <div class="section">
+      <h2>Attributes</h2>
+      <div id="attributes">
+        <div>Danceability: <span id="danceability">0</span></div>
+        <div>Energy: <span id="energy">0</span></div>
+        <div>Popularity: <span id="popularity">0</span></div>
+        <div>Key: <span id="key">0</span></div>
+        <div>Mode: <span id="mode">0</span></div>
+        <div>Speechiness: <span id="speechiness">0</span></div>
+        <div>Acousticness: <span id="acousticness">0</span></div>
+        <div>Instrumentalness: <span id="instrumentalness">0</span></div>
+        <div>Liveness: <span id="liveness">0</span></div>
+        <div>Valence: <span id="valence">0</span></div>
+        <div>Tempo: <span id="tempo">0</span></div>
+        <div>Loudness: <span id="loudness">0</span></div>
+      </div>
+    </div>
+    <div class="section">
+      <h2>Song Recommendations</h2>
+      <div id="results" class="recommendations-box"></div>
+    </div>
+    <button id="calculate-btn" onclick="calculate()">Calculate</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
